@@ -35,14 +35,14 @@ namespace m1101.Test
 
     namespace ConsoleApplication1
     {
-        class TypeName
-        {   
+        class TypeName : System.Web.Mvc.Controller
+        {
         }
     }";
             var expected = new DiagnosticResult
             {
                 Id = "m1101",
-                Message = String.Format("Type name '{0}' contains lowercase letters", "TypeName"),
+                Message = String.Format("Type name '{0}' does not contain \"Controller\" suffix", "TypeName"),
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
@@ -62,8 +62,8 @@ namespace m1101.Test
 
     namespace ConsoleApplication1
     {
-        class TYPENAME
-        {   
+        class TypeNameController : System.Web.Mvc.Controller
+        {
         }
     }";
             VerifyCSharpFix(test, fixtest);
